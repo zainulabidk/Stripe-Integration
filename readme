@@ -1,0 +1,176 @@
+# 🚀 Node.js Auth & Payment API (MVC Pattern)
+## 🙋‍♂️ zain
+
+**sainul abid k**  
+📧 [wwwzainzaan@gmail.com]  
+🔗 [GitHub](https://github.com/zainmp-dev/payment-integration.git) | [LinkedIn](https://www.linkedin.com/in/sainul-abid-k-6040a326b/)
+
+A secure backend API built using **Node.js**, **Express**, and **MongoDB** following the **MVC architecture**. It includes:
+
+- ✅ User Authentication (Register/Login)
+- ✅ JWT for Auth Tokens
+- ✅ CSRF Protection with Cookie support
+- ✅ Input Validation using Joi
+- ✅ Stripe Payment Integration (Checkout & PaymentIntent)
+- ✅ Secure HTTP headers with Helmet
+- ✅ API Rate Limiting
+- ✅ Centralized Error Handling
+
+---
+
+Project Structure (vertical view):
+
+mvc/
+├── config/
+│   ├── db.js
+├── controllers/
+│   ├── authController.js
+│   └── paymentController.js
+├── middleware/
+│   ├── auth.js
+│   └── csrf.js
+│   ├── validate.js
+│   └── errorHandler.js
+├── models/
+│   └── User.js
+├── routes/
+│   ├── authRoutes.js
+│   └── paymentRoutes.js
+├── validators/
+│   └── authValidator.js
+├── app.js
+├── server.js
+├── package.json
+├── package-lock.json
+├── .gitignore
+├── README.md
+└── .env
+
+
+---
+
+🚀🔒 Security Features
+
+- **Helmet** – Adds secure HTTP headers.
+- **Rate Limiting** – Prevents abuse and brute-force attacks.
+- **JWT** – Secure user authentication tokens.
+- **CSRF** – Middleware protection using `csurf` + cookies.
+- **Joi** – Validates request payloads to prevent malformed data.
+
+---
+
+🚀  📦 Installation
+
+```bash
+git clone <repo_url>
+cd mvc
+npm install
+
+🚀 Create a .env file in the root directory and add:
+PORT=3000
+MONGO_URI=your_mongo_url
+JWT_SECRET=your_jwt_secret
+STRIPE_SECRET_KEY=your_stripe_secret_key
+
+
+🚀 Start the Server
+npm start
+
+
+🔐 Auth API Endpoints
+
+| Method | Endpoint                 | Description            | Security         |
+|--------|--------------------------|------------------------|------------------|
+| GET    | `/api/auth/csrf-token`   | Get CSRF Token         | Cookie Required  |
+| POST   | `/api/auth/register`     | Register new user      | CSRF + Joi       |
+| POST   | `/api/auth/login`        | Login & receive JWT    | CSRF + Joi       |
+
+📌 Headers Required:
+
+x-csrf-token: value from /csrf-token
+
+Content-Type: application/json
+{
+  "email": "zain@example.com",
+  "password": "zain%&%$"
+}
+
+
+💳 Stripe Payment API
+
+| Method | Endpoint                                | Description                    |
+|--------|-----------------------------------------|--------------------------------|
+| POST   | `/api/payments/create-checkout-session` | Create Stripe Checkout Session |
+| POST   | `/api/payments/create-payment-intent`   | Create Payment Intent          |
+
+
+📌 Sample Request Body:
+
+json
+Copy
+Edit
+{
+  "amount": 5000,
+  "currency": "inr"
+}
+💡 Amount is in cents (e.g., ₹50.00 = 5000)
+
+
+🧪 Postman Testing Guide
+Step 1: GET /api/auth/csrf-token
+✅ Get the CSRF token from response.
+
+Step 2: Add this to headers:
+x-csrf-token: <copied_token>
+
+Step 3: Use that token in:
+POST /api/auth/register or POST /api/auth/login
+
+Step 4: For payments, use:
+
+POST /api/payments/create-checkout-session
+
+POST /api/payments/create-payment-intent
+
+
+🧠 Why CSRF with JWT?
+Even with JWT, if the token is stored in a cookie, it can be sent automatically by the browser during requests. CSRF tokens prevent malicious websites from forging requests using your browser session. This is especially important for browser-based clients.
+
+
+✅ Tech Stack
+Node.js
+
+Express.js
+
+MongoDB + Mongoose
+
+JWT
+  
+Stripe
+
+Joi
+
+Helmet
+
+csurf
+
+cookie-parser
+
+
+| Feature / Section                   | Included in README? | Notes |
+|------------------------------------|----------------------|-------|
+| ✅ **Auth Endpoints**               | ✔️ Yes               | `GET /csrf-token`, `POST /register`, `POST /login` all documented with security notes |
+| ✅ **CSRF Explanation**            | ✔️ Yes               | With headers, protection reason, and Postman usage |
+| ✅ **Postman Testing Flow**        | ✔️ Yes               | Step-by-step usage with `x-csrf-token` |
+| ✅ **Stripe Endpoints**            | ✔️ Yes               | `POST /create-checkout-session` & `POST /create-payment-intent` |
+| ✅ **Project Setup (.env, install)** | ✔️ Yes               | `.env` config and install steps included |
+| ✅ **Security Stack Summary**      | ✔️ Yes               | JWT, Helmet, CSRF, Joi, etc. |
+| ✅ **File Tree (MVC)**             | ✔️ Yes               | Clear structure block in README |
+| ✅ **Sample Payloads & Headers**   | ✔️ Yes               | For both auth and payments |
+| ✅ **Tech Stack / Contribution**   | ✔️ Yes               | Bottom section |
+
+
+
+🤝 Contributions
+Pull requests are welcome! Fork the repo, create a feature branch, and open a PR 🚀
+Let me know if you'd like this converted into a downloadable file or you want a Swagger/OpenAPI version too.
