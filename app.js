@@ -2,8 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');  
-const csrf = require('csurf');
-
+ 
 const authRoutes = require('./routes/authRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const errorHandler = require('./middleware/errorHandler');
